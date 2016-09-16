@@ -1,0 +1,110 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>基础数据</li>
+    <li class="active">班级管理</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;班级{$title}</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/dict/class_list',null,false,false,false)}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"
+                                data=""><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" action="{:U('admin/dict/class_save',null,false,false,false)}">
+                            <div class="form-title">
+                                班级详情
+                            </div>
+                            <div class="row" style="width: 400px;">
+                                <if condition="$data eq null ">
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">班级名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control className"
+                                                       placeholder="班级名称">
+                                                <input class="id" type="hidden" value="0"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">所属专业<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                 <select style="width: 100%;" class="form-control specialty">
+                                                     <option value="0">请选择所属专业</option>
+                                                     <foreach name="specialty" item="vo">
+                                                         <option value="{$vo.Id}">{$vo.name}</option>
+                                                     </foreach>
+                                                 </select>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                <else/>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">班级名称<span style="color: red">（*）</span></label>
+                                                <span class="input-icon icon-right">
+                                                    <input type="text" class="form-control className" placeholder="班级名称"
+                                                           value="{$data['name']}">
+                                                    <input class="id" type="hidden" value="{$data['Id']}"/>
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                           <label class="setbounds">所属专业<span style="color: red">（*）</span></label>
+                                           <span class="input-icon icon-right">
+                                                <select style="width: 100%;" class="form-control specialty">
+                                                    <option value="0">请选择所属专业</option>
+                                                    <foreach name="specialty" item="vo">
+
+                                                        <if condition="$data['specialty_id'] eq $vo.Id ">
+                                                            <option value="{$vo.Id}" selected>{$vo.name}</option>
+                                                        <else/>
+                                                            <option value="{$vo.Id}">{$vo.name}</option>
+                                                        </if>
+                                                    </foreach>
+                                                </select>
+                                           </span>
+                                        </div>
+                                    </div>
+                                </if>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/class_view.js"></script>
+</block>

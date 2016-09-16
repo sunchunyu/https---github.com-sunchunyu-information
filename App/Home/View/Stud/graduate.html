@@ -1,0 +1,214 @@
+<extend name="Base/base2"/>
+<block name="css">
+    <link href="__PUBLIC__/Static/css/wx_freshman.css" rel="stylesheet">
+</block>
+<block name="content">
+    <div class="widget-header">
+        <span class="widget-caption">毕业生信息收集</span>
+
+        <div class="widget-buttons gamma-refresh" style="padding-right: 10px;">
+            <i class="glyphicon glyphicon-refresh"></i>
+        </div>
+    </div>
+    <div class="widget-body">
+        <div id="registration-form">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">姓名</label>
+                    <span class="input-icon icon-right">
+                        <input type="hidden" id="id" value="{$data.Id|default='0'}" data-status="{$status|default='3'}" data-collection="{$collection}">
+                        <input type="text" class="form-control" id="name"
+                               autofocus placeholder="请输入您的姓名" value="{$data.name|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">身份证号</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="idcard" autofocus placeholder="请输入身份证号" value="{$data.idcard|default=''}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">民族</label>
+                        <select class="form-control" id="nation">
+                            <!-- <option value="0">请选择</option> -->
+                            <volist name="nation" id="vo">
+                                <if condition="$data['nation'] eq $vo.Id ">
+                                    <option value="{$vo.Id}" selected>{$vo.name}</option>
+                                    <else/>
+                                    <option value="{$vo.Id}">{$vo.name}</option>
+                                </if>
+                            </volist>
+                        </select>
+                    </span>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">性别</label>
+                        <span class="input-icon icon-right">
+                            <!--获取用户的所有信息-->
+                            <select class="form-control" id="sex">
+                                <option value="0">保密</option>
+                                <if condition="$data['sex'] eq 1 ">
+                                    <option value="1" selected>男</option>
+                                    <else/>
+                                    <option value="1">男</option>
+                                </if>
+                                <if condition="$data['sex'] eq 2 ">
+                                    <option value="2" selected>女</option>
+                                    <else/>
+                                    <option value="2">女</option>
+                                </if>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">个人电话</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" class="form-control" maxlength="11" id="phone"
+                                   autofocus placeholder="请输入本人电话" value="{$data.phone|default=''}">
+                            <!--                        <i class="fa fa-cny"></i>-->
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">家庭住址</label>
+                            <span class="input-icon icon-right">
+                                <input type="text" class="form-control" id="homeaddr"
+                                       autofocus placeholder="请输入家庭住址" value="{$data.homeaddr|default=''}">
+                                <!--                        <i class="fa fa-cny"></i>-->
+                            </span>
+                    </div>
+                </div>
+                <div class="col-sm-12" style="display: none">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">专业</label>
+                        <select class="form-control" id="speciality">
+                            <!-- <option value="0">请选择</option> -->
+                            <volist name="specialty" id="vo">
+                                <if condition="$data['speciality'] eq $vo.name ">
+                                    <option value="{$vo.name}" selected>{$vo.name}</option>
+                                    <else/>
+                                    <option value="{$vo.name}">{$vo.name}</option>
+                                </if>
+                            </volist>
+                        </select>
+                    </span>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">QQ</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" class="form-control" id="qq"
+                                   autofocus placeholder="请输入QQ账号" value="{$data.qq|default=''}">
+                            <!--                        <i class="fa fa-cny"></i>-->
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">邮箱</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" class="form-control" id="email"
+                                   autofocus placeholder="请输入邮箱" value="{$data.email|default=''}">
+                            <!--                        <i class="fa fa-cny"></i>-->
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位名称</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="company"
+                               autofocus placeholder="请输入单位名称" value="{$data.company|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">组织代码</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="companycode"
+                               autofocus placeholder="请输入组织代码" value="{$data.companycode|default=''}">
+                    </span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位地址</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="addr"
+                               autofocus placeholder="请输入单位地址" value="{$data.addr|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位实际地址</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="addrnow"
+                               autofocus placeholder="请输入单位实际地址" value="{$data.addrnow|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位邮编</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="postcode"
+                               autofocus placeholder="请输入单位邮编" value="{$data.postcode|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位联系人</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="contacts"
+                               autofocus placeholder="请输入单位联系人" value="{$data.contacts|default=''}">
+                    </span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="setbounds">单位电话</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="contactphone"
+                               autofocus placeholder="请输入单位电话" value="{$data.contactphone|default=''}">
+                    </span>
+                    </div>
+                </div>
+            <div class="col-sm-12" style="margin-top: 20px;">
+                <if condition="$status eq 2" >
+                    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="2"
+                       disabled="disabled">已确认</a>
+                    <elseif condition="$status eq 0"/>
+                    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="0"
+                       disabled="disabled">审核中</a>
+                    <elseif condition="$status eq 1"/>
+                    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn"
+                       data="3" url="{:U('/home/stud/graduate_save',null,false,false,false)}">重新提交</a>
+                    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary affirm-btn" data="1"
+                       url="{:U('/home/stud/graduate_status',null,false,false,false)}">请确认</a>
+                    <else/>
+                    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="3" url="{:U('/home/stud/graduate_save',null,false,false,false)}">提交</a>
+                </if>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/wx_graduate.js"></script>
+</block>

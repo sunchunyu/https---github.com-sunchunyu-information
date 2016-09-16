@@ -1,0 +1,169 @@
+<extend name="Base:base"/>
+<block name="link">
+    <style>
+        .title {
+            padding: 20px 0px 20px 0px;
+            width: 100%;
+            max-height: 160px;
+        }
+
+        .title > h4, .title-box > div > h4 {
+            color: white;
+            font-weight: bolder;
+            font-size: 18px;
+            padding: 0px 10px;
+        }
+
+        .title > p, .title-box > div > p {
+            padding: 5px 10px 0px 10px;
+            font-size: 13px;
+            color: white
+        }
+
+        .title-box > div {
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            z-index: 9;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 0px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 15px;
+            font-size: 15px;
+        }
+
+        .content > .zy {
+            border-bottom: 1px solid #DDDDDD;
+            border-left: 0px;
+            border-right: 0px;
+            margin-bottom: 10px;
+            padding: 0px 10px 10px 10px;
+            font-size: 15px;
+            line-height: 1.5em;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .abstract > .zy > span {
+            font-weight: bolder;
+        }
+
+        .content > .bj {
+            padding: 20px 0px 0px 0px;
+            font-size: 15px;
+        }
+
+        .title1, .title-box {
+            max-height: 160px;
+            overflow: hidden;
+        }
+
+        .abstract {
+            padding: 10px 15px;
+            font-size: 15px;
+        }
+
+        .imgzoom_pack {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background: rgba(0, 0, 0, .7);
+        }
+
+        .imgzoom_pack .imgzoom_x {
+            color: #fff;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            background: #000;
+            text-align: center;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .imgzoom_pack .imgzoom_img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+        }
+
+        .imgzoom_pack .imgzoom_img img {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+        }
+    </style>
+</block>
+<block name="page-body">
+    <if condition="$data.thumb.length eq 0">
+        <div class="title" style="background-color: #03B3B2;">
+            <h4>{$data.title}</h4>
+
+            <p>{$data.tags|get_tags}&nbsp;&nbsp;&nbsp;&nbsp;
+                {$data.update_time|date="Y年m月d日",###}
+            </p>
+        </div>
+        <else/>
+        <div class="title-box" style="position: relative;z-index: 10">
+            <img style="position: relative;z-index: 9"
+                 src="{$data.thumb}">
+            |
+            <div>
+                <h4>{$data.title}</h4>
+
+                <p>{$data.tags|get_tags}&nbsp;&nbsp;&nbsp;&nbsp;
+                    {$data.update_time|date="Y年m月d日",###}
+                </p>
+            </div>
+        </div>
+    </if>
+    <div class="abstract" style="background-color: #eee;">
+        <p class="zy">
+            <span>[&nbsp;摘要&nbsp;]</span>&nbsp;{$data.abstract}</p>
+    </div>
+    <div class="content">
+
+        {$data.content}
+        <p class="bj">责任编辑：<?php echo C('AppName')?></p>
+    </div>
+    <div class="imgzoom_pack" style="display: none;">
+        <div class="imgzoom_x">X</div>
+        <div class="imgzoom_img"><img class="pp" src=""></div>
+    </div>
+</block>
+<block name="script">
+    <script src="/Public/assets/js/scale.js"></script>
+    <script>
+        $(function () {
+            $(".header").remove();
+            var w = document.body.clientWidth;
+            $(".content img").width(w - 30).css("margin", "10px 0px");
+            $(".content img").on("click", function () {
+                $(".imgzoom_img>img").attr("src", $(this).attr("src"));
+                $(".imgzoom_img>img").css("marginTop", "-" + ($(this).height() / 2) + "px");
+                $(".imgzoom_pack").show();
+
+            });
+            $(".imgzoom_x").on("click", function () {
+                $(".imgzoom_pack").hide();
+                $(".imgzoom_img>img").attr("src", "");
+            });
+            //$(".title-box>img").width(w);
+            window.ImagesZoom.init({
+                "elem": ".content"
+            })
+        })
+    </script>
+</block>

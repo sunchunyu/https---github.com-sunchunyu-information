@@ -1,0 +1,478 @@
+<extend name="Base/base2"/>
+<block name="css">
+    <link href="__PUBLIC__/Static/css/wx_freshman.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/assets/dropify/dist/css/dropify.min.css">
+</block>
+<block name="content">
+<div class="widget-header">
+    <span class="widget-caption">学籍采集</span>
+</div>
+
+<div class="widget-body">
+<div id="registration-form">
+<div class="row">
+<input id="save-url" data="{:U('Home/Stud/status_save')}" type="hidden">
+
+<!--姓名-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="name">姓名</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="name" placeholder="本人姓名" value="{$stud.name}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--性别-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="sex">性别</label>
+                    <!--获取用户的所有信息-->
+                        <select class="form-control" id="sex">
+                            <option value="0">保密</option>
+                            <if condition="$stud['sex'] eq 1 ">
+                                <option value="1" selected>男</option>
+                                <else/>
+                                <option value="1">男</option>
+                            </if>
+                            <if condition="$stud['sex'] eq 2 ">
+                                <option value="2" selected>女</option>
+                                <else/>
+                                <option value="2">女</option>
+                            </if>
+                        </select>
+                </span>
+</div>
+<!--姓名拼音-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="pinyin">姓名拼音</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" value="ddd" name="pinyin" class="form-control" id="pinyin"
+                               placeholder="本人姓名拼音" value="{$stud.pinyin}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--身份证号-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="idcard">身份证号</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="idcard" placeholder="本人身份证号" value="{$stud.idcard}"
+                               maxlength="19">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--中招考试所在地-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="wheremidd">中招考试所在地</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud.wheremidd}" id="wheremidd"
+                               placeholder="中招考试所在">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--准考证号-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="ticketnumber">准考证号</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['ticketnumber']}" id="ticketnumber"
+                               placeholder="本人准考证号">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--民族-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="nation">民族</label>
+                    <!--获取区域的所有信息-->
+                    <select class="form-control" id="nation_id">
+                        <option value="0">请选择</option>
+                        <volist name="nation" id="vo">
+                            <if condition="$vo.Id eq $stud['nation_id']">
+                                <option value="{$vo.Id}" selected> {$vo.name}</option>
+                                <else/>
+                                <option value="{$vo.Id}"> {$vo.name}</option>
+                            </if>
+                        </volist>
+                    </select>
+                </span>
+</div>
+<!--电话-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="phone">电话</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['phone']}" id="phone" placeholder="本人电话"
+                               maxlength="11">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--出生日期-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="birth">出生日期</label>
+                    <span class="input-icon icon-right">
+                        <input type="date" class="form-control" value="{$stud['birth']}" id="birth"
+                               placeholder="yyyy-mm-dd">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--班级-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right" style="display: none">
+                    <label class="class">班级</label>
+                    <!--获取区域的所有信息-->
+                    <select class="form-control" id="class">
+                        <option value="0">请选择</option>
+                        <volist name="class" id="vo">
+                            <if condition="$vo.Id eq $stud['class']">
+                                <option  value="{$vo.Id}" selected> {$vo.name}</option>
+                                <else/>
+                                <option  value="{$vo.Id}"> {$vo.name}</option>
+                            </if>
+                        </volist>
+                    </select>
+                </span>
+</div>
+<!--户籍所在地-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="native">户籍所在地</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['native']}" id="native"
+                               placeholder="本人户籍所在地">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--户籍所在详细地址-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="domicile">户籍所在详细地址</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['domicile']}" id="domicile"
+                               placeholder="本人户籍所在详细地址">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长1姓名-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent1_name">家长1姓名</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent1_name']}" id="parent1_name"
+                               placeholder="家长1姓名">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长1身份证号码-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent1_idcard">家长1身份证号码</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent1_idcard']}" id="parent1_idcard"
+                               placeholder="家长1身份证号码" maxlength="19">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长1出生年月-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent1_birth">家长1出生年月</label>
+                    <span class="input-icon icon-right">
+                        <input type="date" class="form-control" id="parent1_birth"
+                               placeholder="yyyy-mm-dd" value="{$stud['parent1_birth']}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长1关系-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent1_rela">家长1关系</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent1_rela']}" id="parent1_rela"
+                               placeholder="本人与家长1关系" maxlength="4">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长1是否监护人-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="parent1_guardian">家长1是否监护人</label>
+                    <!--获取用户的所有信息-->
+                    <select class="form-control" id="parent1_guardian">
+                        <if condition="$stud['parent1_guardian'] eq 0 ">
+                            <option value="0" selected>否</option>
+                            <option value="1">是</option>
+                            <else/>
+                            <option value="0">否</option>
+                            <option value="1" selected>是</option>
+                        </if>
+
+                    </select>
+                </span>
+</div>
+<!--家长1电话-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent1_phone">家长1电话</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent1_phone']}" id="parent1_phone"
+                               placeholder="家长1电话" maxlength="11">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+
+
+<!--家长2姓名-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent2_name">家长2姓名</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent2_name']}" id="parent2_name"
+                               placeholder="家长2姓名">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长2身份证号码-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent2_idcard">家长2身份证号码</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent2_idcard']}" id="parent2_idcard"
+                               placeholder="家长2身份证号码" maxlength="19">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长2出生年月-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent2_birth">家长2出生年月</label>
+                    <span class="input-icon icon-right">
+                        <input type="date" class="form-control" value="{$stud['parent2_birth']}" id="parent2_birth"
+                               placeholder="yyyy-mm-dd">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长2关系-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent2_rela">家长2关系</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent2_rela']}" id="parent2_rela"
+                               placeholder="本人与家长2关系" maxlength="4">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家长2是否监护人-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="parent2_guardian">家长2是否监护人</label>
+                    <!--获取用户的所有信息-->
+                    <select class="form-control" id="parent2_guardian">
+                        <if condition="$stud['parent2_guardian'] eq 0 ">
+                            <option value="0" selected>否</option>
+                            <option value="1">是</option>
+                            <else/>
+                            <option value="0">否</option>
+                            <option value="1" selected>是</option>
+                        </if>
+                    </select>
+                </span>
+</div>
+<!--家长2电话-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="parent2_phone">家长2电话</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['parent2_phone']}" id="parent2_phone"
+                               placeholder="家长2电话" maxlength="11">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--户口类型-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="accounttype">户口类型</label>
+                    <select class="form-control" id="accounttype">
+                        <volist name="accounttype" id="vo" key="k">
+                            <if condition="$k-1 eq $stud['polity']">
+                                <option value="{$k-1}" selected>{$vo}</option>
+                                <else/>
+                                <option value="{$k-1}">{$vo}</option>
+                            </if>
+                        </volist>
+                    </select>
+                </span>
+</div>
+<!--是否低保-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="allowances">是否低保</label>
+                    <select class="form-control" id="allowances">
+                        <if condition="$stud['allowances'] eq 0 ">
+                            <option value="0" selected>否</option>
+                            <option value="1">是</option>
+                            <else/>
+                            <option value="0">否</option>
+                            <option value="1" selected>是</option>
+                        </if>
+                    </select>
+                </span>
+</div>
+<!--家庭邮编-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="homecode">家庭邮编</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['homecode']}" id="homecode"
+                               placeholder="本人家庭邮编">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家庭住址-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="homeaddr">家庭住址</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['homeaddr']}" id="homeaddr"
+                               placeholder="本人家庭住址">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--家庭所属派出所-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="homepolice">家庭所属派出所</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" value="{$stud['homepolice']}" id="homepolice"
+                               placeholder="本人家庭所属派出所">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--学生来源-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="source">学生来源</label>
+                    <!--获取区域的所有信息-->
+                    <select class="form-control" id="source_id">
+                        <option value="0">请选择</option>
+                        <volist name="source" id="vo">
+                            <if condition=" $vo.Id eq $stud['source_id']">
+                                <option value="{$vo.Id}" selected> {$vo.name}</option>
+                                <else/>
+                                <option value="{$vo.Id}"> {$vo.name}</option>
+                            </if>
+
+                        </volist>
+                    </select>
+                </span>
+</div>
+<!--政治面貌-->
+<div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="polity">政治面貌</label>
+                    <select class="form-control" id="polity">
+                        <volist name="polity" id="vo" key="k">
+                            <if condition="$k-1 eq $stud['polity']">
+                                <option value="{$k-1}" selected>{$vo}</option>
+                                <else/>
+                                <option value="{$k-1}">{$vo}</option>
+                            </if>
+                        </volist>
+                    </select>
+                </span>
+</div>
+<!--中考成绩-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="grades">中考成绩</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="grades" placeholder="本人中考成绩"
+                               value="{$stud['grades']}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--QQ-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="qq">QQ</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="qq" placeholder="本人QQ号" value="{$stud['qq']}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<!--邮箱-->
+<div class="col-sm-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+        <label class="email">邮箱</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="email" placeholder="本人邮箱" value="{$stud['email']}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+    </div>
+</div>
+<div class="col-sm-12">
+    <label>本人相片(2寸白底)</label>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <input type="file" id="photo" class="dropify" name="dropify" data-default-file="__ROOT__{$stud['photo']}"/>
+
+            <br/>
+        </div>
+    </div>
+
+</div>
+</div>
+<input id="id" value="{$stud['Id']}" data="{$stud.status}" type="hidden">
+<input type="hidden" value="{$collection_id}" id="collection_id">
+
+<if condition="$stud['status'] eq 2">
+    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary" data="2"
+       disabled="disabled">已确认</a>
+    <elseif condition="$stud['status'] eq 0"/>
+    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary" data="0"
+       disabled="disabled">审核中</a>
+    <elseif condition="$stud['status'] eq 1"/>
+    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn"
+       data="3" url="{:U('/home/stud/status_save',null,false,false,false)}">重新提交</a>
+    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary affirm-btn" data="1"
+       url="{:U('/home/stud/status_change',null,false,false,false)}">请确认</a>
+    <else/>
+    <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="3"
+       url="{:U('/home/stud/status_save',null,false,false,false)}">提交</a>
+</if>
+</div>
+</div>
+</block>
+<block name="js">
+    <script src="__PUBLIC__/Static/js/wx_status.js"></script>
+    <script src="__PUBLIC__/assets/dropify/dist/js/dropify.min.js"></script>
+</block>

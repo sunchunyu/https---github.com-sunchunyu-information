@@ -1,0 +1,174 @@
+<extend name="Base/base2"/>
+<block name="css">
+    <link href="__PUBLIC__/Static/css/wx_freshman.css" rel="stylesheet">
+    <!--上传图片插件css-->
+    <link rel="stylesheet" href="__PUBLIC__/assets/dropify/dist/css/dropify.min.css">
+</block>
+<block name="content">
+    <form method="post" name="category_form" method="post" enctype="multipart/form-data"
+          action="{:U('Home/Stud/freshman_save')}?fh={$fresh.Id}">
+        <div class="widget-header">
+            <input type="hidden" id="st_hiden" value="{$st}"/>
+            <span class="widget-caption">新生报道</span>
+        </div>
+        <div class="widget-body">
+            <div id="registration-form">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <label class="setbounds">姓名</label>
+                    <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="name" name="name"
+                               placeholder="姓名" maxlength="10" value="{$fresh.name}">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="setbounds">性别</label>
+                        <select class="form-control" id="sex" name="sex">
+                            <option value="0">未知</option>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <label class="setbounds">身份证号</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" class="form-control" id="idcard"
+                                   placeholder="身份证号码" name="idcard" maxlength="20" value="{$fresh.idcard}">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">中招考试所在地</label>
+                        <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="wheremidd" name="wheremidd"
+                               placeholder="河南省-郑州市-中原区" maxlength="30" value="{$fresh.wheremidd}">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">准考证号</label>
+                        <span class="input-icon icon-right">
+                        <input type="text" class="form-control" name="ticketnumber" id="ticketnumber"
+                               placeholder="准考证号码" maxlength="30" value="{$fresh.ticketnumber}">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">电话号码</label>
+                        <span class="input-icon icon-right">
+                        <input type="text" class="form-control" name="phone" id="phone"
+                               placeholder="固定电话或手机号码" maxlength="11" value="{$fresh.phone}">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">家庭住址</label>
+                        <span class="input-icon icon-right">
+                        <input type="text" class="form-control" id="addr"
+                               placeholder="身份证上的地址" name="addr" maxlength="30" value="{$fresh.addr}">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                    </span>
+                    </span>
+                    </div>
+                    <div class="col-sm-12"style="display: none">
+                    <span class="input-icon icon-right">
+                        <label class="setbounds">专业名称</label>
+                        <select class="form-control" id="speciality" name="speciality">
+                            <volist name="specialty_rs" id="vo">
+                                <option value="{$vo.name}" data="{$vo.Id}"> {$vo.name}</option>
+                            </volist>
+                        </select>
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                <span class="input-icon icon-right">
+                    <label class="setbounds">专业类别</label>
+                    <select class="form-control" id="category" name="category">
+                        <option value="0">请选择专业类别</option>
+                        <volist name="category" id="cate">
+                            <option value="{$cate}" data="{$i-1}">{$cate}</option>
+                        </volist>
+                    </select>
+                </span>
+                    </div>
+                    <div class="col-sm-12">
+                    <span class="input-icon icon-right">
+                         <span class="input-icon icon-right">
+                            <label class="setbounds">考试总分</label>
+                             <span class="input-icon icon-right">
+                                <input type="number" class="form-control" name="totalscore" id="totalscore"
+                                       placeholder="高考或中考总分" maxlength="10" value="{$fresh.totalscore}">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </span>
+                        </span>
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>备注</label>
+                        <span class="input-icon icon-right">
+                            <textarea class="form-control" rows="4" id="remark" name="remark"
+                                    >{$fresh.remark}</textarea>
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label>个人相片（2寸白底）</label>
+                        <input type="hidden" value="" id="img_status" name="img_status"/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="file" id="photo" class="dropify" name="dropify"
+                                       data-default-file="__ROOT__{$fresh.photo}"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <if condition="$fresh.status eq 2">
+                            <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="2"
+                               disabled="disabled">已确认</a>
+                        <elseif condition="$fresh.status eq 0"/>
+                            <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="0"
+                               disabled="disabled">审核中</a>
+                        <elseif condition="$fresh.status eq 1"/>
+                            <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn"
+                               data="3">重新提交</a>
+                            <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="1" data-type="0">请确认</a>
+                        <else/>
+                        <a style="margin-bottom: 10px;width: 100%" class="btn btn-primary save-btn" data="3" data-type="1">提交</a>
+                        </if>
+                    </div>
+                </div>
+                <input type="hidden" id="status" value="{$fresh.status}"
+                       data="{:U('Home/Stud/change_status')}?fh={$fresh.Id}"/>
+            </div>
+            <input type="hidden" value="{$collection_id}" id="collection_id" name="collection_id">
+            <input type="hidden" value="{$baseInfoId.xy}" id="xy_id" name="xy_id"/>
+            <input type="hidden" value="{$baseInfoId.yx}" id="college_id" name="college_id"/>
+            <input type="hidden" value="{$baseInfoId.zy}" id="specialty_id" name="specialty_id"/>
+            <input type="hidden" value="{$baseInfoId.bj}" id="class_id" name="class_id"/>
+            <input id="my_id" type="hidden" value="{$fresh.Id}">
+            <input id="my_sex" type="hidden" value="{$fresh.sex}">
+            <input id="my_category" type="hidden" value="{$fresh.category}">
+            <input id="my_speciality" type="hidden" value="{$fresh.speciality}">
+        </div>
+    </form>
+</block>
+<block name="js">
+    <script src="__PUBLIC__/Static/js/wx_freshman.js"></script>
+    <!--上传图片插件-->
+    <script src="__PUBLIC__/assets/dropify/dist/js/dropify.min.js"></script>
+</block>

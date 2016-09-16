@@ -1,0 +1,60 @@
+<extend name="Base:base"/>
+<block name="title">
+    {$p.name}
+</block>
+<block name="link">
+    <!--本页面CSS-->
+    <style>
+        .weui_media_box.weui_media_text .weui_media_info {
+            padding: 2px 0px;
+        }
+        .tag {
+            background-color: #e8e8e8;
+            padding: 2px 3px;
+            border-radius: 2px;
+            margin-left: 3px;
+            font-size: 0.5em;
+            color: #999;
+        }
+    </style>
+</block>
+<block name="page-body">
+    <volist name="data" id="vv">
+        <if condition="count($vv['news']) gt 0 ">
+            <div class="weui_panel">
+                <div class="weui_panel_hd">{$vv.name|gm_substr=0,8}</div>
+                <div class="weui_panel_bd">
+                    <volist name="vv.news" id="vo">
+                        <if condition="$vo.url eq ''">
+                            <div class="weui_media_box weui_media_text" data="{:U('home/index/d')}?id={$vo.Id}">
+                                <else/>
+                                <div class="weui_media_box weui_media_text" data="{$vo.url}">
+                        </if>
+
+                        <h4 class="weui_media_title">{$vo.title}</h4>
+
+                        <p class="weui_media_desc">{$vo.abstract}</p>
+                        <ul class="weui_media_info">
+                            <li class="weui_media_info_meta" style="margin-left: -3px;">{$vo.tags|get_tags}</li>
+                            <li class="weui_media_info_meta">
+                                {$vo.update_time|date="Y-m-d",###}
+                            </li>
+                            <!--<li class="weui_media_info_meta weui_media_info_meta_extra">浏览{$vo.views}次</li>-->
+                        </ul>
+                </div>
+    </volist>
+    </div>
+    <if condition="count($vv['news']) gt 5">
+        <a href="{:U('home/index/m')}?id={$vv.Id}" class="weui_panel_ft" style="font-size: 13px;">查看更多</a>
+    </if>
+    </div>
+    </if>
+    </volist>
+</block>
+<block name="script">
+    <script>
+        $(".weui_media_box").on("click", function () {
+            window.location.href = $(this).attr("data");
+        })
+    </script>
+</block>

@@ -1,0 +1,60 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+    <link href="__PUBLIC__/Static/css/category_add.css" rel="stylesheet"/>
+    <!--上传图片插件css-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Static/lib/upload_img/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Static/lib/upload_img/css/default.css">
+    <link rel="stylesheet" href="__PUBLIC__/Static/lib/upload_img/dist/css/demo.css">
+    <link rel="stylesheet" href="__PUBLIC__/Static/lib/upload_img/dist/css/dropify.min.css">
+
+</block>
+<block name="breadcrumb">
+    <li>微网站</li>
+    <li class="active">资讯信息</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;类别编辑</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/Wx/category_list')}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default category_edit_save"
+                                data="{:U('admin/Wx/category_edit_save')}"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" name="category_form" method="post" enctype="multipart/form-data"
+                              action="{:U('admin/Wx/category_add_save')}">
+                            <div class="form-title">
+                                类别详情
+                            </div>
+                            <div class="row">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script src="__STATIC__/js/category_edit.js" type="text/javascript"></script>
+    <!--上传图片插件-->
+    <script src="__PUBLIC__/Static/lib/upload_img/dist/js/dropify.min.js"></script>
+</block>

@@ -1,0 +1,7 @@
+.tb td{padding:3px;}
+#name,
+#count,
+#addr{
+    width: 192px;
+    margin-left: 0px;
+}

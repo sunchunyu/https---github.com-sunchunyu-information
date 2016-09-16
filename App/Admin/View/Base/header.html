@@ -1,0 +1,54 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="navbar-container">
+            <!-- Navbar Barnd -->
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <img style="width: 170px;height: 28px;margin-top: 6px;" src="__PUBLIC__/assets/img/logo.png" alt=""/>
+                    </small>
+                </a>
+            </div>
+            <!-- /Navbar Barnd -->
+
+            <!-- Sidebar Collapse -->
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="collapse-icon fa fa-bars"></i>
+            </div>
+            <!-- /Sidebar Collapse -->
+            <!-- Account Area and Settings --->
+            <div class="navbar-header pull-right">
+                <div class="navbar-account">
+                    <ul class="account-area">
+                        <li style="right: -40px;">
+                            <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                <div class="avatar" style="border-left:0px;" title="点击修改密码或退出系统">
+                                    <img src="__PUBLIC__/assets/img/avatars/boy.png">
+                                </div>
+                                <section style="width: 105px;">
+                                    <h2><span class="profile">您好，<?php echo $_SESSION["USER_NAME"] ?></span></h2>
+                                </section>
+                            </a>
+                            <!--Login Area Dropdown-->
+                            <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                <li class="email"><a>欢迎使用信息采集系统</a></li>
+                                <li>
+                                    <div class="avatar-area">
+                                        <img src="__PUBLIC__/assets/img/avatars/boy.png" class="avatar">
+                                    </div>
+                                </li>
+                                <li class="dropdown-footer edit">
+                                    <a href="{:U('admin/index/pass',null,false,false,false)}" class="pull-left" id="bootbox-options">修改密码</a>
+                                    <a id="logout" href="#" data="{:U('admin/index/logout',null,false,false,false)}" class="pull-right">退出系统</a>
+                                </li>
+                            </ul>
+                            <!--/Login Area Dropdown-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /Account Area and Settings -->
+        </div>
+    </div>
+</div>
+

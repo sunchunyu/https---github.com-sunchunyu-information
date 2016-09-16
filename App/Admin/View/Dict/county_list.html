@@ -1,0 +1,126 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+    <link href="__PUBLIC__/assets/css/dataTables.bootstrap.css" rel="stylesheet"/>
+</block>
+<block name="breadcrumb">
+    <li >基础数据</li>
+    <li class="active">省市区</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-table"></i>&nbsp;&nbsp;省市区列表</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+
+                    <div class="table-toolbar">
+                        <div class="panel-group accordion" id="accordion" style="margin-bottom: 8px;">
+                            <div class="panel panel-default">
+                                <div class="panel-heading ">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                           data-parent="#accordion"
+                                           href="#collapseOne">
+                                            <i class="fa fa-search"></i> 高级搜索
+                                        </a>
+                                    </h4>
+                                </div>
+                                <lable data="{:U('admin/dict/get_city',null,false,false,false)}" id="get-city-rul" hidden></lable>
+                                <div id="collapseOne" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <label>所属省</label>
+                                        <select  id="pro-list">
+                                            <option value="-1">全部</option>
+                                            <foreach name="pro_data" item="vo" >
+                                                <option value="{$vo.Id}">{$vo.name}</option>
+                                            </foreach>
+                                        </select>
+
+
+                                        <label>所属市</label>
+                                        <select   id="city-list">
+                                            <option value="-1">全部</option>
+                                            <foreach name="city_data" item="vo" >
+                                                <option value="{$vo.Id}">{$vo.name}</option>
+                                            </foreach>
+                                        </select>
+
+                                        <label>名称</label>
+                                            <input type="text" maxlength="20" class="form-control Name"
+                                               placeholder="名称" style="width: 150px;display: inline-block;">
+                                        <button type="submit" class="btn btn-primary search" style="padding: 7px; margin-top: -3px;">
+                                            <i class="fa fa-search"></i>搜索
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-add"
+                                data="{:U('admin/dict/county_view',null,false,false,false)}"><i
+                                class="fa fa-plus-square"></i> 新增
+                        </button>
+                        <button type="button" class="btn btn-default btn-edit"
+                                data="{:U('admin/dict/county_view',null,false,false,false)}"><i
+                                class="fa fa-pencil-square"></i> 编辑
+                        </button>
+                        <button type="button" class="btn btn-default btn-del"
+                                data="{:U('admin/dict/county_delete',null,false,false,false)}"><i
+                                class="fa fa-minus-square"></i> 删除
+                        </button>
+                        <!--获取到数据库的数据等待js使用-->
+                        <button type="button" class="btn btn-primary btn-query" style="display: none;"
+                                data="{:U('admin/dict/county_query',null,false,false,false)}">
+                            <i class="fa fa-search"></i> 查询
+                        </button>
+                        <!--获取PHP路径-->
+                        <button type="button" id="county-url" style="display: none;"
+                                data="{:U('admin/dict/county_initialize',null,false,false,false)}">
+                        </button>
+                        <!--初始化按钮的按钮-->
+                        <button type="button" class="btn btn-default btn-init">
+                            <i class="fa fa-retweet"></i> 初始化
+                        </button>
+
+                    </div>
+
+                    <div role="grid" id="simpledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+                        <table class="table table-striped table-bordered table-hover" id="simpledatatable">
+                            <thead>
+                            <tr>
+                                <th> 省/市/区名称</th>
+                                <th> 类别</th>
+                                <th> 所属市</th>
+                                <th> 所属省</th>
+                                <th> 操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/assets/js/datatable/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/assets/js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Static/js/county_list.js"></script>
+</block>

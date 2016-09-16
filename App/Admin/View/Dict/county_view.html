@@ -1,0 +1,162 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>基础数据</li>
+    <li class="active">省市区管理</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;省市区{$title}</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/dict/county_list',null,false,false,false)}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"
+                                data=""><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" action="{:U('admin/dict/county_save',null,false,false,false)}">
+                            <div class="form-title">
+                                省市区详情
+                            </div>
+                            <div class="row" style="width: 400px;">
+
+                                <lable data="{$make}" id="make" hideen></lable>        <!--标示全部的操作类型-->
+                                <lable data="{$city_id}" id="city_id" hideen></lable>        <!--标示全部的操作类型-->
+
+                                <if condition="$data eq null ">
+                                    <!--添加功能代码区域-->
+                                    <lable data="{:U('admin/dict/get_city',null,false,false,false)}" id="get-city-rul" hidden></lable>
+                                    <lable data="{:U('admin/dict/county_save',null,false,false,false)}" id="save-rul" hidden></lable>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">所属省名称</label>
+                                            <span class="input-icon icon-right">
+                                                 <select style="width: 100%;" class="form-control pro" id="pro-list" >
+                                                     <option value="0">请选择</option>
+                                                     <volist name="pro" id="data">
+                                                         <option value="{$data.Id}">{$data.name}</option>
+                                                     </volist>
+                                                 </select>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">所属市名称</label>
+                                            <span class="input-icon icon-right">
+                                                 <select style="width: 100%;" class="form-control city" id="city-list">
+                                                     <option value="0">请选择</option>
+                                                 </select>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control areaName"
+                                                       placeholder="名称">
+                                                <input class="id" type="hidden" value="0"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <else/>
+
+                                    <sapn data="{:U('admin/dict/edit_save',null,false,false,false)}" id="edit-url" hideen ></sapn>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">所属省名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <if condition= "$pro_flag eq true ">
+                                                    <select style="width: 100%;" class="form-control edit-pro">
+                                                        <option value="0">请选择</option>
+                                                        <volist name="list" id="vo">
+                                                            <option value="{$vo.Id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                <else/>
+                                                    <select style="width: 100%;" class="form-control edit-pro" disabled>
+                                                        <option value="0">请选择</option>
+                                                        <volist name="list" id="vo">
+                                                            <option value="{$vo.Id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </if>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">所属市名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <if condition= "$city_flag eq true ">
+                                                    <select style="width: 100%;" class="form-control edit-city"  >
+                                                        <option value="0">请选择</option>
+                                                        <volist name="city_list" id="vo">
+                                                            <option value="{$vo.Id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                <else/>
+                                                    <select style="width: 100%;" class="form-control edit-city"  disabled>
+                                                        <option value="0">请选择</option>
+                                                        <volist name="city_list" id="vo">
+                                                            <option value="{$vo.Id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </if>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!--名称文本框-->
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">区名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control Name"
+                                                       placeholder="区名称" value="{$data.text}">
+                                                <input class="id" type="hidden" value="{$data.id}"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </if>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span id="province-id" hidden style="display:none;">{$data.province_id}</span>
+
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/county_view.js"></script>
+</block>

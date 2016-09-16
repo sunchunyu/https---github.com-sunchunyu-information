@@ -1,0 +1,60 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+    <link href="__PUBLIC__/assets/css/dataTables.bootstrap.css" rel="stylesheet"/>
+    <style>
+        .table-striped > tbody > tr.add > td {
+            background-color: #eed;
+        }
+    </style>
+</block>
+<block name="breadcrumb">
+    <li>微网站</li>
+    <li class="active">资讯类别</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-table"></i>&nbsp;&nbsp;首页类别排序</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div role="grid" id="simpledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+                        <table class="table table-striped table-bordered table-hover" id="simpledatatable">
+                            <thead>
+                            <tr>
+                                <th> 排序</th>
+                                <th> 类别名称</th>
+                                <th> 类别图标</th>
+                                <th> 外站链接</th>
+                                <th> 操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="btn-query" type="hidden"
+           data="{:U('admin/wx/desktop_query',null,false,false,false)}"/>
+    <input type="hidden" value="{:U('admin/wx/desktop_move',null,false,false,false)}"
+           id="desktop_move"/>
+    <input id="path" type="hidden" value=""/>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/assets/js/datatable/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/assets/js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Static/js/desktop_list.js"></script>
+</block>

@@ -1,0 +1,148 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--上传图片插件css-->
+    <link rel="stylesheet" href="__PUBLIC__/assets/dropify/dist/css/dropify.min.css">
+    <!--本页面CSS-->
+    <link href="__PUBLIC__/Static/css/employer_add.css" rel="stylesheet"/>
+</block>
+<block name="breadcrumb">
+    <li>微网站</li>
+    <li class="active">招聘信息</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;招聘信息{$title}</span>
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/Wx/employer_list')}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default employer_add_save"
+                                data="{:U('admin/Wx/employer_add_save')}"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" name="employer_form" method="post"
+                              enctype="multipart/form-data" action="{:U('admin/Wx/employer_add_save')}?id={$id}">
+                            <div class="form-title">
+                                招聘信息添加详情
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group margin" style="margin-bottom: 0px;">
+                                        <div class="col-sm-8">
+                                            <label>单位名称:<span class="red">*</span></label>
+                                             <span class="input-icon icon-right">
+                                                <input type="text" class="form-control" placeholder="单位名称"
+                                                       maxlength="15" name="employer_title" id="cemployer_title"
+                                                       value="{$employer['name']}">
+                                                <input class="roleId" type="hidden"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>所属行业:<span class="red">*</span></label>
+                                            <input type="hidden" id="industry_title" value="{$employer['industry']}"/>
+                                            <select class="form-control" name="industry_title">
+                                                <option value="0">请选择</option>
+                                                <volist name="industry" id="vo">
+                                                    <option value="{$i-1}">{$vo}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-8">
+                                            <label>单位网址:</label>
+                                             <span class="input-icon icon-right">
+                                                <input type="text" class="form-control"
+                                                       placeholder="请输入链接（http开头)" maxlength="30"
+                                                 name="url" id="url" value="{$employer['url']}">
+                                                <input class="roleId" type="hidden"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>单位规模:<span class="red">*</span></label>
+                                            <input type="hidden" id="com_size" value="{$employer['com_size']}"/>
+                                            <select class="form-control" name="com_size">
+                                                <volist name="com_size" id="vo">
+                                                    <option value="{$i-1}">{$vo}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>单位电话:<span class="red">*</span></label>
+                                             <span class="input-icon icon-right">
+                                                <input type="text" class="form-control" placeholder="单位电话"
+                                                       maxlength="15" name="tel" id="tel" value="{$employer['tel']}">
+                                                <input class="roleId" type="hidden"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>单位邮箱:<span class="red">*</span></label>
+                                             <span class="input-icon icon-right">
+                                                <input type="text" class="form-control" placeholder="单位邮箱"
+                                                       name="email" id="email" value="{$employer['email']}">
+                                                <input class="roleId" type="hidden"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>单位地址:<span class="red">*</span></label>
+                                             <span class="input-icon icon-right">
+                                                <input type="text" class="form-control" placeholder="单位详细地址"
+                                                       maxlength="50" name="addr" id="addr" value="{$employer['addr']}">
+                                                <input class="roleId" type="hidden"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                        <div id="ue" class="col-sm-8">
+                                            <label>单位简介：</label>
+                                            <textarea type="text/plain" id="myEditor"
+                                                      style="width:100%;height: 300px">{$employer['brief']}</textarea>
+                                            <input type="hidden" value="" id="hide" name="hide"/>
+                                        </div>
+                                        <div class="container col-sm-8">
+                                            <label>单位logo:（推荐大小120*120）</label>
+                                            <input type="hidden" value="" id="img_status" name="img_status"/>
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <input type="file" id="input-file-now" class="dropify"
+                                                           name="logo_img" data-default-file="__ROOT__{$employer['logo']}"/>
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--ue-->
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/assets/ue/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/assets/ue/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/assets/ue/lang/zh-cn/zh-cn.js"></script>
+
+    <script src="__STATIC__/js/employer_add.js" type="text/javascript"></script>
+    <!--上传图片插件-->
+    <script src="__PUBLIC__/assets/dropify/dist/js/dropify.min.js"></script>
+</block>

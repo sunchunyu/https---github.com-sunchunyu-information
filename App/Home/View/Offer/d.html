@@ -1,0 +1,161 @@
+<extend name="Base:base"/>
+<block name="title">
+    职位详情
+</block>
+<block name="link">
+    <!--本页面CSS-->
+    <style>
+        .weui_media_box.weui_media_text .weui_media_info {
+            padding: 2px 0px;
+        }
+
+        .tag {
+            background-color: #e8e8e8;
+            padding: 2px 3px;
+            border-radius: 2px;
+            margin-left: 3px;
+            font-size: 0.5em;
+            color: #999;
+        }
+
+        .weui_media_box > .weui_media_desc {
+            line-height: 2em
+        }
+
+        .weui_media_box.weui_media_text .weui_media_info {
+            margin-top: 5px;
+        }
+
+        .item > img {
+            position: relative;
+            top: 3px;
+            width: 16px;
+        }
+        .abc, .tops {
+            position: relative;
+            z-index: 4;
+            font-size: 13px;
+            float: right;
+            background-color: #FF6600;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: white;
+            top: -4px;
+        }
+
+        .tops {
+            background-color: #03B3B2;
+            margin-right: 3px;
+
+        }
+    </style>
+</block>
+<block name="page-body">
+    <div class="weui_panel">
+        <div class="weui_panel_hd">岗位信息 <span class="abc">热度[{$offer.views}°]</span><if condition="$offer.is_top eq 1"><span class="tops">推荐</span></if></div>
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <h4 class="weui_media_title">{$offer.name}</h4>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                        <img src="__ROOT__/Public/Static/img/salary.png"/>
+                        <span class="text">{$offer.salary}</span>
+                    </span>
+                    <span class="item">
+                         <img src="__ROOT__/Public/Static/img/addr.png" style="margin-left: 20px;"/>
+                        <span class="text">{$offer.addr}</span>
+                    </span>
+                     <span class="item">
+                        <img src="__ROOT__/Public/Static/img/jobnature.png" style="margin-left: 20px;"/>
+                        <span class="text">全职</span>
+                    </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                         <img src="__ROOT__/Public/Static/img/edu.png"
+                              style="width: 18px;top:4px;"/>
+                        <span class="text">{$offer.education}</span>
+                    </span>
+                    <span class="item">
+                        <img src="__ROOT__/Public/Static/img/workyear.png" style="width: 18px;top:4px;margin-left: 20px;"/>
+                        <span class="text">{$offer.worklife}</span>
+                    </span>
+                     <span class="item">
+                       <img src="__ROOT__/Public/Static/img/users.png" style="width: 18px;top:4px;margin-left: 20px;"/>
+                        <span class="text">{$offer.number}人</span>
+                    </span>
+                </p>
+                <if condition="$offer.welfare neq ''">
+                    <ul class="weui_media_info">
+                        <li class="weui_media_info_meta">{$offer.welfare|get_tags}</li>
+                    </ul>
+                </if>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_panel">
+        <div class="weui_panel_hd">单位信息</div>
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <h4 class="weui_media_title">{$comm.name}</h4>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                         <img src="__ROOT__/Public/Static/img/hy.png"
+                              style="width: 18px;top:4px;"/>
+                        <span class="text">{$comm.industry}</span>
+                    </span>
+                    <span class="item">
+                        <img src="__ROOT__/Public/Static/img/gm.png" style="width: 18px;top:4px;margin-left: 20px;"/>
+                        <span class="text">{$comm.com_size}</span>
+                    </span>
+
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                       <img src="__ROOT__/Public/Static/img/dh.png" style="width: 18px;top:4px;"/>
+                        <span class="text">{$comm.tel}</span>
+                    </span>
+                    <span class="item">
+                       <img src="__ROOT__/Public/Static/img/yx.png" style="width: 25px;top:4px;margin-left: 15px;"/>
+                        <span class="text">{$comm.email}</span>
+                    </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                       <img src="__ROOT__/Public/Static/img/wz.png" style="width: 20px;top:4px;margin-left: -2px;"/>
+                        <span class="text">{$comm.url}</span>
+                    </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="item">
+                       <img src="__ROOT__/Public/Static/img/dz.png" style="top:4px;"/>
+                        <span class="text">{$comm.addr}</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_panel">
+        <div class="weui_panel_hd">岗位描述</div>
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text" id="content">
+                {$offer.content}
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(function () {
+            $("#content *").addClass("weui_media_desc").css("lineHeight", "1.7em");
+        })
+    </script>
+</block>

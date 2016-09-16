@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="user-scalable=no,width=device-width, initial-scale=1,maximum-scale=1" name="viewport">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta content="Title" name="apple-mobile-web-app-title">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="//cdn.bootcss.com/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/assets/css/beyond.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Static/css/wx_app.css" rel="stylesheet">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <block name="css"></block>
+    <title>
+        <block name="title">信息采集</block>
+    </title>
+    <script>
+        /*wx.config({
+         appId: "{$appId}",
+         timestamp: parseInt("{$timestamp}"),
+         nonceStr: "{$nonceStr}",
+         signature: "{$signature}",
+         jsApiList: [
+         'onMenuShareTimeline',
+         'onMenuShareAppMessage'
+         ]
+         });
+         wx.hideOptionMenu();
+         wx.error(function (res) {
+         //alert(JSON.stringify(res));
+         });*/
+    </script>
+</head>
+<body>
+<div class="content">
+    <div class="widget-header">
+        <span class="widget-caption">基本信息</span>
+    </div>
+    <div class="widget-body" style="margin-bottom: 10px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">学院
+                            </button>
+                        </span>
+                    <input type="text" class="form-control" id="txt-xy" readonly value="{$baseInfo.xy}"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">院系
+                            </button>
+                        </span>
+                    <input type="text" class="form-control" id="txt-yx" readonly value="{$baseInfo.yx}"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">专业
+                            </button>
+                        </span>
+                    <input type="text" class="form-control" id="txt-zy" readonly value="{$baseInfo.zy}"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">班级
+                            </button>
+                        </span>
+                    <input type="text" class="form-control" id="txt-bj" readonly value="{$baseInfo.bj}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <block name="content"></block>
+</div>
+<div class="gamma-search-layer animated">
+    <div class="widget-header">
+        <span class="widget-caption">选择院系、专业、班级</span>
+
+        <!--<div class="widget-buttons gamma-remove" style="padding-right: 10px;">
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>-->
+    </div>
+    <div class="widget-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">学院
+                            </button>
+                        </span>
+                    <select class="form-control" id="gamma-xy">
+                        <if condition="count($dict_xy) gt 1 ">
+                            <option value="0" data="0" selected>请选择学院</option>
+                        </if>
+                        <volist name="dict_xy" id="vo">
+                            <option data="{$vo.pid}" value="{$vo.Id}"> {$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">院系
+                            </button>
+                        </span>
+                    <select class="form-control" id="gamma-yx">
+                        <if condition="count($dict_yx) gt 0 ">
+                            <option value="0" data="0" selected>请选择院系</option>
+                        </if>
+                        <volist name="dict_yx" id="vo">
+                            <option data="{$vo.pid}" value="{$vo.Id}"> {$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">专业
+                            </button>
+                        </span>
+                    <select class="form-control" id="gamma-zy">
+                        <if condition="count($dict_zy) gt 0 ">
+                            <option value="0" data="0" selected>请选择专业</option>
+                        </if>
+                        <volist name="dict_zy" id="vo">
+                            <option data="{$vo.pid}" value="{$vo.Id}"> {$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group input-group-sm">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">班级
+                            </button>
+                        </span>
+                    <select class="form-control" id="gamma-bj">
+                        <if condition="count($dict_bj) gt 0 ">
+                            <option value="0" data="0" selected>请选择班级</option>
+                        </if>
+                        <volist name="dict_bj" id="vo">
+                            <option data="{$vo.pid}" value="{$vo.Id}"> {$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <a style="width: 100%" class="btn btn-primary search-btn">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="gm-xy" value="{$baseInfoId.xy}"/>
+<input type="hidden" id="gm-yx" value="{$baseInfoId.yx}"/>
+<input type="hidden" id="gm-zy" value="{$baseInfoId.zy}"/>
+<input type="hidden" id="gm-bj" value="{$baseInfoId.bj}"/>
+</body>
+</html>
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<script src="__PUBLIC__/Static/js/wx_app.js"></script>
+<block name="js"></block>

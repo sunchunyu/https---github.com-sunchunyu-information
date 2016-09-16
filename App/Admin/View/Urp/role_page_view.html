@@ -1,0 +1,66 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+    <link rel="stylesheet" href="__PUBLIC__/Static/css/zTreeStyle.css">
+    <style>
+        .ztree li a {
+            height: 22px;
+        }
+    </style>
+</block>
+<block name="breadcrumb">
+    <li>用户权限</li>
+    <li class="active">角色权限</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;用户角色</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/urp/role_list',null,false,false,false)}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"
+                                data="{:U('admin/urp/role_page_save',null,false,false,false)}"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <input type="hidden" id="btn-power" data="{$role.Id}"
+                           value="{:U('admin/urp/role_page_list',null,false,false,false)}"/>
+
+                    <div style="width: 400px;margin-top: 10px;">
+                        <div class="widget flat radius-bordered">
+                            <div class="widget-header bg-lightred">
+                                <span class="widget-caption">[ {$role.name} ]权限列表 </span>
+                            </div>
+
+                            <div class="widget-body" style="background-color: #eee;">
+                                <ul id="treeDemo" class="ztree"></ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="pages" value='{$pages}'>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/jquery.ztree.core.min.js"></script>
+    <script src="__PUBLIC__/Static/js/jquery.ztree.excheck.js"></script>
+    <script src="__PUBLIC__/Static/js/role_page_view.js"></script>
+</block>

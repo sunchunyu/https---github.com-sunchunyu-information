@@ -1,0 +1,11 @@
+.red {
+    font-weight: bolder;
+    font-size: 16px;
+    margin-left: 9px;
+    position: relative;
+    top: 3px;
+}
+
+.col-sm-6, .col-sm-12 {
+    margin-bottom: 10px;
+}

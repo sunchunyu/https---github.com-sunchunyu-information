@@ -1,0 +1,73 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>用户权限</li>
+    <li class="active">用户角色</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;用户角色</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/urp/user_list',null,false,false,false)}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"
+                                data="{:U('admin/urp/user_role_save',null,false,false,false)}"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <input type="hidden" id="btn-power" data="{$user.Id}"
+                           value="{:U('admin/urp/user_role_list',null,false,false,false)}"/>
+
+                    <div style="width: 400px;margin-top: 10px;">
+                        <div class="widget flat radius-bordered">
+                            <div class="widget-header bg-lightred">
+                                <span class="widget-caption">[ {$user.name} ] 拥有的角色 √</span>
+                            </div>
+
+                            <div class="widget-body" style="background-color: #eee;">
+                                <div id="MyTree" class="tree">
+                                    <div class="tree-folder" style="display: none;">
+                                        <div class="tree-folder-header">
+                                            <i class="fa fa-folder"></i>
+
+                                            <div class="tree-folder-name"></div>
+                                        </div>
+                                        <div class="tree-folder-content">
+                                        </div>
+                                        <div class="tree-loader" style="display: none;"></div>
+                                    </div>
+                                    <div class="tree-item" style="display: none;">
+                                        <i class="tree-dot"></i>
+
+                                        <div class="tree-item-name"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/assets/js/fuelux/treeview/tree-custom.min.js"></script>
+    <script src="__PUBLIC__/Static/js/user_role_view.js"></script>
+</block>

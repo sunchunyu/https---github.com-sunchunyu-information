@@ -1,0 +1,84 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>个人中心</li>
+    <li class="active">密码管理</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;密码修改</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/index/index',null,false,false,false)}"><i
+                                class="fa fa-home"></i> 首页
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" action="{:U('admin/index/dopass',null,false,false,false)}">
+                            <div class="form-title">
+                                密码详情
+                            </div>
+                            <div class="row" style="width: 400px;">
+
+                                <div class="col-sm-12">
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label class="setbounds">原密码<span style="color: red">（*）</span></label>
+                                    <span class="input-icon icon-right">
+                                            <input type="password" maxlength="30" class="form-control old_pass"
+                                                   placeholder="原密码">
+                                        <i class="fa fa-asterisk"></i>
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label class="setbounds">新密码<span style="color: red">（*）</span></label>
+                                    <span class="input-icon icon-right">
+                                            <input type="password" maxlength="30" class="form-control new_pass"
+                                                   placeholder="新密码">
+                                        <i class="fa fa-asterisk"></i>
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label class="setbounds">重复密码<span style="color: red">（*）</span></label>
+                                    <span class="input-icon icon-right">
+                                            <input type="password" maxlength="30" class="form-control txt_pass"
+                                                   placeholder="重复密码">
+                                        <i class="fa fa-asterisk"></i>
+                                    </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/index_pass.js"></script>
+</block>

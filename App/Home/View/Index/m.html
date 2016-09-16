@@ -1,0 +1,192 @@
+<extend name="Base:base"/>
+<block name="title">
+    资讯列表
+</block>
+<block name="link">
+    <!--本页面CSS-->
+    <link href="/Public/assets/css/dropload.css" rel="stylesheet">
+    <style>
+        .dropload-down {
+            background-color: #FFFFFF;
+        }
+
+        .weui_media_box.weui_media_text .weui_media_info {
+            padding: 2px 0px;
+        }
+
+        .tag {
+            background-color: #e8e8e8;
+            padding: 2px 3px;
+            border-radius: 2px;
+            margin-left: 3px;
+            font-size: 0.5em;
+            color: #999;
+        }
+    </style>
+</block>
+<block name="page-body">
+    <div class="container">
+        <div class="weui_search_bar" id="search_bar">
+            <form class="weui_search_outer">
+                <div class="weui_search_inner">
+                    <i class="weui_icon_search"></i>
+                    <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+                    <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+                </div>
+                <label for="search_input" class="weui_search_text" id="search_text">
+                    <i class="weui_icon_search"></i>
+                    <span>搜索</span>
+                </label>
+                <input id="id" value="{$p.Id}" type="hidden"/>
+            </form>
+            <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+        </div>
+        <div class="weui_panel" style="margin-top: 0px;" data="{$p.Id}">
+            <div class="weui_panel_hd">{$p.name}</div>
+            <div class="weui_panel_bd">
+
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="/Public/assets/js/dropload.min.js"></script>
+    <script>
+        function searchbar() {
+            $('.container').on('focus', '#search_input', function () {
+                var $weuiSearchBar = $('#search_bar');
+                $weuiSearchBar.addClass('weui_search_focusing');
+            }).on('blur', '#search_input', function () {
+                var $weuiSearchBar = $('#search_bar');
+                $weuiSearchBar.removeClass('weui_search_focusing');
+                if ($(this).val()) {
+                    $('#search_text').hide();
+                } else {
+                    $('#search_text').show();
+                }
+            }).on('input', '#search_input', function () {
+                var $searchShow = $("#search_show");
+                if ($(this).val()) {
+                    $searchShow.show();
+                } else {
+                    $searchShow.hide();
+                }
+                setCookie("__K__", $(this).val());
+            }).on('touchend', '#search_cancel', function () {
+                $("#search_show").hide();
+                $('#search_input').val('');
+                setCookie("__K__", "");
+            }).on('touchend', '#search_clear', function () {
+                $("#search_show").hide();
+                $('#search_input').val('');
+                setCookie("__K__", "");
+            });
+        }
+        $(function () {
+            searchbar();
+            var id = getCookie("__ID__");
+            if (id == "") {
+                setCookie("__ID__", $(".weui_panel").attr("data"));
+            } else {
+                $(".weui_panel").attr("data", id);
+            }
+
+            var k = getCookie("__K__");
+            if ($.trim(k) != "") {
+                $('#search_input').val(k);
+                $(".weui_search_text").hide();
+            } else {
+                $('#search_input').val("");
+                $(".weui_search_text").show();
+            }
+
+            //$(".header").remove();
+            var counter = 0;
+            var dropload = $(".container").dropload({
+                scrollArea: window,
+                loadUpFn: function (me) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{:U('home/index/s')}",
+                        dataType: 'json',
+                        data: {p: 0, k: $("#search_input").val(), id: $(".weui_panel").attr("data")},
+                        success: function (data) {
+                            counter = 1;
+                            $('.weui_panel_bd').html(makeHtml(data.data));
+                            $(".weui_panel_hd").html(data.name);
+                            // 每次数据加载完，必须重置
+                            dropload.resetload();
+                            bind();
+                        },
+                        error: function (xhr, type) {
+                            // 即使加载出错，也得重置
+                            dropload.resetload();
+                        }
+                    });
+                },
+                loadDownFn: function (me) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{:U('home/index/s')}",
+                        dataType: 'json',
+                        data: {p: counter, k: $("#search_input").val(), id: $(".weui_panel").attr("data")},
+                        success: function (data) {
+                            counter++;
+                            // 每次数据加载完，必须重置
+
+                            $('.weui_panel_bd').append(makeHtml(data.data));
+                            $(".weui_panel_hd").html(data.name);
+                            if (data.data.length == 0) {
+                                dropload.noData();
+                            }
+                            dropload.resetload();
+                            if (counter >= data.sum) {
+                                counter = data.sum;
+                                dropload.noData();
+                                return;
+                            }
+                            bind();
+                        },
+                        error: function (xhr, type) {
+                            // 即使加载出错，也得重置
+                            dropload.resetload();
+                        }
+                    });
+                }
+            });
+        });
+        function bind() {
+            $(".weui_media_box").on("click", function () {
+                window.location.href = $(this).attr("data");
+            })
+        }
+        function makeHtml(d) {
+            var html = "";
+            for (var i = 0; i < d.length; i++) {
+                var url = d[i].url == "" ? "{:U('home/index/d')}" : d[i].url;
+                html += '<div class="weui_media_box weui_media_text" data="' + url + '?id=' + d[i].Id + '">' +
+                '<h4 class="weui_media_title">' + d[i].title + '</h4>' +
+                '<p class="weui_media_desc">' + d[i].abstract + '</p>' +
+                '<ul class="weui_media_info">' +
+                '<li class="weui_media_info_meta" style="margin-left: -3px;">' + getTags(d[i].tags) + '</li>' +
+                '<li class="weui_media_info_meta weui_media_info_meta_extra">' + d[i].update_time + '</li>' +
+                '</ul>' +
+                '</div>';
+            }
+            return html;
+        }
+        function getTags(str) {
+            var html = "";
+            if (str != "") {
+                var items = str.split(",");
+                $.each(items, function (i, v) {
+                    html += "<span class='tag'>" + v + "</span>"
+                })
+            } else {
+                html = "<span class='tag'>资讯</span>";
+            }
+            return html;
+        }
+    </script>
+</block>

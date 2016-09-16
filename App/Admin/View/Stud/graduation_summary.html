@@ -1,0 +1,77 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>信息采集</li>
+    <li class="active">毕业信息</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-globe"></i> 毕业生信息统计</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="table-toolbar" style="margin-bottom: 5px;">
+                        <div class="panel-body">
+                            <label>起始时间</label>
+                            <input class="date-picker" id="start_time" type="text" data-date-format="yyyy-mm-dd" placeholder="请输入起始时间" value="{$start_time}" style="width: 200px">
+
+                            <label>终止时间</label>
+                            <input class="date-picker" id="end_time" placeholder="请输入终止时间" type="text"  data-date-format="yyyy-mm-dd" value="{$end_time}" style="width: 200px">
+
+                            <label>类别</label>
+                            <select id="type">
+                                <option value="0" />学院</option>
+                                <option value="1" />系别</option>
+                                <option value="2" />专业</option>
+                                <option value="3" />班级</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" onclick="javascript:GetData();" style="padding: 7px;margin-left: 0%;margin-top: -3px">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-post"
+                                data="{:U('admin/stud/graduation_data',null,false,false,false)}" style="display: none"><i
+                                class="fa fa-download"></i> 数据信息
+                        </button>
+                    </div>
+
+                    <div id="container" style="min-width:700px;height:400px"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script type="text/javascript" src="__PUBLIC__/assets/Highcharts/js/highcharts.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/assets/Highcharts/js/modules/exporting.js"></script> <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-3d.js"></script>
+    <script src="__PUBLIC__/Static/js/graduation_summary.js"></script>
+    <!--Bootstrap Date Picker-->
+    <script src="__PUBLIC__/assets/js/datetime/bootstrap-datepicker.js"></script>
+
+    <!--Bootstrap Time Picker-->
+    <script src="__PUBLIC__/assets/js/datetime/bootstrap-timepicker.js"></script>
+
+    <!--Bootstrap Date Range Picker-->
+    <script src="__PUBLIC__/assets/js/datetime/moment.js"></script>
+    <script src="__PUBLIC__/assets/js/datetime/daterangepicker.js"></script>
+    <script type="text/javascript">
+        $('.date-picker').datepicker();
+    </script>
+</block>

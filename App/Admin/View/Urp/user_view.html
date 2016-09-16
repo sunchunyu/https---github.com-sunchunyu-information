@@ -1,0 +1,136 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="breadcrumb">
+    <li>用户权限</li>
+    <li class="active">用户管理</li>
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-pencil"></i>&nbsp;&nbsp;用户{$title}</span>
+
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-add"
+                           href="{:U('admin/urp/user_list',null,false,false,false)}"><i
+                                class="fa fa-chevron-left"></i> 返回
+                        </a>
+                        <button type="button" class="btn btn-default btn-save"
+                                data=""><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <div class="form" style="padding: 20px 0px;">
+                        <form method="post" id="form" action="{:U('admin/urp/user_save',null,false,false,false)}">
+                            <div class="form-title">
+                                用户详情
+                            </div>
+                            <div class="row" style="width: 400px;">
+                                <if condition="$user eq null ">
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户名称<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control userName"
+                                                       placeholder="用户名称">
+                                                <input class="userId" type="hidden" value="0"/>
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户帐号<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control userCode"
+                                                       placeholder="用户帐号">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户手机</label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="11" class="form-control userPhone"
+                                                       placeholder="用户手机">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户邮箱</label>
+                                            <span class="input-icon icon-right">
+                                                <input type="email" maxlength="50" class="form-control userEmail"
+                                                       placeholder="用户邮箱">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <else/>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户名称<span style="color: red">（*）</span></label>
+                                                <span class="input-icon icon-right">
+                                                    <input type="text" class="form-control userName" placeholder="用户名称"
+                                                           value="{$user['name']}">
+                                                    <input class="userId" type="hidden" value="{$user['Id']}"/>
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户帐号<span style="color: red">（*）</span></label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text" maxlength="20" class="form-control userCode"
+                                                       placeholder="用户帐号" value="{$user['code']}">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户手机</label>
+                                            <span class="input-icon icon-right">
+                                                <input type="text"  maxlength="11" class="form-control userPhone"
+                                                       placeholder="用户手机" value="{$user['phone']}">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group" style="margin-bottom: 10px;">
+                                            <label class="setbounds">用户邮箱</label>
+                                            <span class="input-icon icon-right">
+                                                <input type="email" maxlength="50" class="form-control userEmail"
+                                                       placeholder="用户邮箱" value="{$user['email']}">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </if>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script src="__PUBLIC__/Static/js/user_view.js"></script>
+</block>

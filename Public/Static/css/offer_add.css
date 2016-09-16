@@ -1,0 +1,15 @@
+.father > div {
+    margin-top: 15px;
+}
+
+.red {
+    font-weight: bolder;
+    font-size: 16px;
+    margin-left: 9px;
+    position: relative;
+    top: 3px;
+}
+
+.bootstrap-tagsinput input {
+    padding-left: 10px;
+}

@@ -1,0 +1,168 @@
+<extend name="Base:base"/>
+<block name="link">
+    <!--本页面CSS-->
+</block>
+<block name="page-body">
+    <!--本页面Body-->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-globe"></i>&nbsp;&nbsp;PU/UV统计图表</span>
+                </div>
+                <div class="widget-body getindex" data="{:U('admin/index/getindex',null,false,false,false)}">
+                    <div class="table-toolbar" style="margin-bottom: 5px;">
+                        <div class="panel-body" style="padding: 0px;">
+                            <label>起始日期</label>
+                            <input class="date-picker start_time1 start_time0" type="text" data-date-format="yyyy-mm-dd"
+                                   placeholder="请输入起始日期" value="{$start_time}" style="width: 40px;min-width:117px">
+                            <label>终止日期</label>
+                            <input class="date-picker end_time1 end_time0" placeholder="请输入终止日期" type="text"
+                                   data-date-format="yyyy-mm-dd" value="{$end_time}"
+                                   style="width: 40px;min-width:117px">
+                            <button type="submit" class="btn btn-primary" onclick="javascript:GetData(1);"
+                                    style="padding: 7px;margin-left: 0%;margin-top: -3px">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+                        </div>
+
+                    </div>
+                    <div id="container" style="height:400px"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption"><i class="fa fa-globe"></i>&nbsp;&nbsp;信息采集统计图表</span>
+                </div>
+                <div class="widget-body">
+                    <div class="table-toolbar" style="margin-bottom: 5px;">
+                        <div class="panel-body" style="padding: 0px;">
+                            <label>起始日期</label>
+                            <input class="date-picker start_time3" type="text" data-date-format="yyyy-mm-dd"
+                                   placeholder="请输入起始日期" value="{$start_time}"
+                                   style="width: 40px;min-width:117px;margin-left: 1px;">
+                            <label>终止日期</label>
+                            <input class="date-picker end_time3" placeholder="请输入终止日期" type="text"
+                                   data-date-format="yyyy-mm-dd" value="{$end_time}"
+                                   style="width: 40px;min-width:117px;margin-left: 1px;">
+                            <button type="submit" class="btn btn-primary" onclick="javascript:GetData(3);"
+                                    style="padding: 7px;margin-left: 0%;margin-top: -3px">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+                        </div>
+
+                    </div>
+                    <div id="container1" style="height:400px"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-caption"><i class="fa fa-globe"></i>&nbsp;&nbsp;微网站统计图表</span>
+                </div>
+
+                <div class="widget-body">
+                    <div class="table-toolbar" style="margin-bottom: 5px;">
+                        <div class="panel-body" style="padding: 0px;">
+                            <label>起始日期</label>
+                            <input class="date-picker start_time2" type="text" data-date-format="yyyy-mm-dd"
+                                   placeholder="请输入起始日期" value="{$start_time}" style="width: 40px;min-width:117px">
+                            <label>终止日期</label>
+                            <input class="date-picker end_time2" placeholder="请输入终止日期" type="text"
+                                   data-date-format="yyyy-mm-dd" value="{$end_time}"
+                                   style="width: 40px;min-width:117px">
+                            <button type="submit" class="btn btn-primary" onclick="javascript:GetData(2);"
+                                    style="padding: 7px;margin-left: 0%;margin-top: -3px">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+                        </div>
+                    </div>
+                    <div id="container2" style="height:400px">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-caption"><i class="fa fa-globe"></i>&nbsp;&nbsp;热度排行 TOP 10</span>
+                </div>
+
+                <div class="widget-body" style="padding: 0px;">
+                    <div class="widget-main no-padding">
+                        <div class="tickets-container" style="padding: 10px;cursor: pointer">
+                            <ul class="tickets-list" style="padding-right: 14px;padding-left: 7px;">
+                                <volist name="tops" id="vo">
+                                    <li class="ticket-item">
+                                        <div class="row">
+                                            <if condition="$vo.type eq 0 ">
+                                                <a href="{:U('home/Index/d')}?id={$vo.id}" target="_blank">
+                                                    <else/>
+                                                    <a href="{:U('home/Offer/d')}?id={$vo.id}" target="_blank">
+                                            </if>
+                                            <div class="ticket-user col-lg-12 col-sm-12" style="height: 100%">
+                                                <span class="user-company">{$vo.views}°C</span>
+                                                <span class="user-at">For</span>
+                                                <span class="user-name" style="color: #444;">
+                                                    <if condition="$vo.type eq 0 ">
+                                                        [资讯]
+                                                        <else/>
+                                                        [招聘]
+                                                    </if>
+                                                    {$vo.title}</span>
+                                            </div>
+                                            <!--<div class="ticket-time  col-lg-4 col-sm-6 col-xs-12">
+                                                <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                <i class="fa fa-clock-o"></i>
+                                                <span class="time">1 Hours Ago</span>
+                                            </div>-->
+                                            <!--<div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                <span class="divider hidden-xs"></span>
+                                                <span class="type">Issue</span>
+                                            </div>-->
+
+                                            <if condition="$vo.type eq 0 ">
+                                                <div class="ticket-state bg-darkorange" style="top:7px;">
+                                                    <i class="fa fa-info"></i>
+                                                </div>
+                                                <else/>
+                                                <div class="ticket-state bg-palegreen" style="top:7px;">
+                                                    <i class="fa fa-leaf"></i>
+                                                </div>
+                                            </if>
+
+                                            </a>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <!--本页面JavaScript-->
+    <script type="text/javascript" src="__PUBLIC__/assets/Highcharts/js/highcharts.js"></script>
+    <script src="__PUBLIC__/Static/js/index.js"></script>
+    <!--Bootstrap Date Picker-->
+    <script src="__PUBLIC__/assets/js/datetime/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+        $('.date-picker').datepicker();
+    </script>
+</block>
